@@ -6,25 +6,43 @@ import scipy
 
 data_dir = "./data/"
 
-def executeProj():
-    TrainClass0, TrainClass1, TestClass0, TestClass1 = sys.argv
-    class0_train = scipy.io.loadmat(data_dir + "training0.mat") 
-    class1_train = scipy.io.loadmat(data_dir + "training1.mat")
-    class0_test = scipy.io.loadmat(data_dir + "testing0.mat") 
-    class1_test = scipy.io.loadmat(data_dir + "testing1.mat")
+class execute:
+    def __init__(self):
+        self.dim_red  = pca.PCA()
 
-    model = train(class0_train, class1_train)
-    predicted = test(class0_test, class1_test)
-    print("Accuracy:"+ accuracy())
 
-def train(class0, class1):
+    def norm_train(self, class0, class1):
+        p = prop.Process(class0, class1)
+        self.train,self.label = p.preprocess()
+        self.mu = self.train.mean()
+        self.sigma = self.train.std()
+        self.norm = p.normalize(flag=True)
     
+    def norm_test(self, class0, class1):
+        p = prop.Process(class0, class1)
+        
+
+        
+        
+
+    
+    def fit_pca(self):
+        final_train = self.dim_red.fit_transform(self.norm)
+
+    def transform_pca(self):
+        final_test = self.dim_red.transform()
 
 
-def test():
+
+        
 
 
-def accuracy():
+
+
+
+
+
+
 
 
 
@@ -35,4 +53,10 @@ def accuracy():
 
 
 if __name__ == '__main__':
-    executeProj()
+    TrainClass0, TrainClass1, TestClass0, TestClass1 = sys.argv
+    class0_train = scipy.io.loadmat(data_dir + "training0.mat") 
+    class1_train = scipy.io.loadmat(data_dir + "training1.mat")
+    class0_test = scipy.io.loadmat(data_dir + "testing0.mat") 
+    class1_test = scipy.io.loadmat(data_dir + "testing1.mat")
+
+    
