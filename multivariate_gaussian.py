@@ -6,9 +6,6 @@ from scipy.stats import multivariate_normal
 class GaussNB:
     
     def __init__(self):
-        """
-        No params are needed for basic functionality.
-        """
         pass
     
     def _mean(self,X): 
@@ -27,7 +24,6 @@ class GaussNB:
         for i in self.classes_:
             idx = np.argwhere(self.y==i).flatten()
             cov[i] = np.cov(X[idx,:].T)
-#         cov = np.cov(X.T)
         return cov
             
     
