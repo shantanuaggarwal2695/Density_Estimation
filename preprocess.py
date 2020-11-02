@@ -22,7 +22,7 @@ class Process:
         return self.df_train, self.df_label
     
     def normalize(self, *args):
-        df_norm = (self.df_train - self.mu/self.sigma
+        df_norm = (self.df_train - self.mu)/self.sigma
         return df_norm
 
 
