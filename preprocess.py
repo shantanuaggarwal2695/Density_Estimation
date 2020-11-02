@@ -17,13 +17,12 @@ class Process:
         df1_label = [1]*df1.shape[0]
         self.df_train = pd.concat([df0,df1], axis=0)
         self.df_label = pd.concat([pd.DataFrame(df0_label), pd.DataFrame(df1_label)], axis=1)
+        self.mu = self.df_train.mean()
+        self.sigma = self.df_train.std()
         return self.df_train, self.df_label
     
-    def normalize(self, flag=0, *args):
-        if flag == 0:
-            df_norm = (self.df_train - self.df_train.mean())/self.df_train.std()
-        else:
-            df_norm = (self.df_train - args[0])/args[1]
+    def normalize(self, *args):
+        df_norm = (self.df_train - self.mu/self.sigma
         return df_norm
 
 
