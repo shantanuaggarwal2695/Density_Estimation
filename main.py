@@ -13,24 +13,40 @@ class execute:
 
     def norm_train(self, class0, class1):
         p = prop.Process(class0, class1)
-        self.train,self.label = p.preprocess()
+        self.train = p.preprocess()
         self.mu = self.train.mean()
         self.sigma = self.train.std()
-        self.norm = p.normalize(flag=True)
+        self.norm, self.label = p.normalize(flag=True)
+        return self.norm, self.label
     
     def norm_test(self, class0, class1):
         p = prop.Process(class0, class1)
-        
-
-        
-        
-
+        self.test = p.preprocess()
+        self.norm, self.label = p.normalize(self.mu, self.sigma, flag=False)
+        return self.norm, self.label
     
     def fit_pca(self):
         final_train = self.dim_red.fit_transform(self.norm)
 
     def transform_pca(self):
-        final_test = self.dim_red.transform()
+        final_test = self.dim_red.transform(self.norm)
+
+class train:
+
+    def __init__(self, train, labels):
+        self.train = train
+        self.labels = labels
+    
+    def estimate(self):
+        self.gnb = mvg.GaussNB()
+        self.gnb.fit(self.train, self.labels)
+
+    def predict(self, test, labels):
+        predicted = self.gnb.predict(test)
+        
+
+
+
 
 
 
