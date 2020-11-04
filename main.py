@@ -2,7 +2,7 @@ import preprocess as prop
 import pca
 import multivariate_gaussian as mvg
 import sys
-import scipy
+from scipy import io
 
 data_dir = "./data/"
 
@@ -47,16 +47,18 @@ class train:
 
 
 if __name__ == '__main__':
-    TrainClass0, TrainClass1, TestClass0, TestClass1 = sys.argv
-    class0_train = scipy.io.loadmat(data_dir + TrainClass0) 
-    class1_train = scipy.io.loadmat(data_dir + TrainClass1)
-    class0_test = scipy.io.loadmat(data_dir + TestClass0) 
-    class1_test = scipy.io.loadmat(data_dir + TestClass1)
 
+    TrainClass0, TrainClass1, TestClass0, TestClass1 = sys.argv[1:5]
+    class0_train = io.loadmat(data_dir + TrainClass0) 
+    class1_train = io.loadmat(data_dir + TrainClass1)
+    class0_test = io.loadmat(data_dir + TestClass0) 
+    class1_test = io.loadmat(data_dir + TestClass1)
+
+    # print(class0_train)
     #Start processing of Data
     exec = execute()
     train,label = exec.norm_train(class0_train, class1_test)
-    print(train)
+    # print(train)
 
 
     
