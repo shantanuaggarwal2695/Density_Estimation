@@ -46,33 +46,17 @@ class train:
         
 
 
-
-
-
-
-        
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 if __name__ == '__main__':
     TrainClass0, TrainClass1, TestClass0, TestClass1 = sys.argv
-    class0_train = scipy.io.loadmat(data_dir + "training0.mat") 
-    class1_train = scipy.io.loadmat(data_dir + "training1.mat")
-    class0_test = scipy.io.loadmat(data_dir + "testing0.mat") 
-    class1_test = scipy.io.loadmat(data_dir + "testing1.mat")
+    class0_train = scipy.io.loadmat(data_dir + TrainClass0) 
+    class1_train = scipy.io.loadmat(data_dir + TrainClass1)
+    class0_test = scipy.io.loadmat(data_dir + TestClass0) 
+    class1_test = scipy.io.loadmat(data_dir + TestClass1)
+
+    #Start processing of Data
+    exec = execute()
+    train,label = exec.norm_train(class0_train, class1_test)
+    print(train)
+
 
     

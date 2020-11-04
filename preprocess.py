@@ -16,7 +16,7 @@ class Process:
         df0_label = [0]*df0.shape[0]
         df1_label = [1]*df1.shape[0]
         self.df_train = pd.concat([df0,df1], axis=0)
-        self.df_label = pd.concat([pd.DataFrame(df0_label), pd.DataFrame(df1_label)], axis=1)
+        self.df_label = pd.concat([pd.DataFrame(df0_label), pd.DataFrame(df1_label)], axis=0)
         return self.df_train
     
     def normalize(self, *args, flag=True):
