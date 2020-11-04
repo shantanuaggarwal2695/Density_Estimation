@@ -9,12 +9,15 @@ class Process:
         self.class1 = class_1['nim1']
     
     def preprocess(self):
-        training_0 = np.reshape(self.class0, (-1,784))
-        training_1 = np.reshape(self.class1, (-1,784))
+        training_0 = np.reshape(self.class0, (784,-1))
+        training_1 = np.reshape(self.class1, (784,-1))
+        training_0 = np.transpose(training_0)
+        training_1 = np.transpose(training_1)
         df0 = pd.DataFrame(training_0)
         df1 = pd.DataFrame(training_1)
         df0_label = [0]*df0.shape[0]
         df1_label = [1]*df1.shape[0]
+
         self.df_train = pd.concat([df0,df1], axis=0)
         self.df_label = pd.concat([pd.DataFrame(df0_label), pd.DataFrame(df1_label)], axis=0)
         return self.df_train

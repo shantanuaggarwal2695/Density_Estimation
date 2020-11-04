@@ -6,9 +6,15 @@ from scipy.stats import multivariate_normal
 class GaussNB:
     
     def __init__(self):
+        """
+        No params are needed for basic functionality.
+        """
         pass
     
-    def _mean(self,X): 
+    def _mean(self,X): # CHECKED
+        """
+        Returns class probability for each 
+        """
         mu = dict()
         for i in self.classes_:
             idx = np.argwhere(self.y == i).flatten()
@@ -24,6 +30,7 @@ class GaussNB:
         for i in self.classes_:
             idx = np.argwhere(self.y==i).flatten()
             cov[i] = np.cov(X[idx,:].T)
+#         cov = np.cov(X.T)
         return cov
             
     
@@ -40,12 +47,14 @@ class GaussNB:
         
         
     def fit(self, X, y):
+        print(pd.DataFrame(X))
+        print(y.shape)
         self.n_samples, self.n_feats = X.shape
         self.n_classes = np.unique(y).shape[0]
         self.classes_ = np.unique(y)
         self.y = y
         
-        self.means_ = self._mean(X) # dict of list {class:feats}
+        self.means_ = self._mean(X) 
         self.priors_ = self._prior()
         self.cov_ = self._cov(X)
         
