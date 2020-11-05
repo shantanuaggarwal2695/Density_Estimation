@@ -73,7 +73,7 @@ if __name__ == '__main__':
 
     # print("PCA done........")
 
-    training = estimator(train_red, np.array(label1))
+    training = estimator(train_red,np.array(label1))
     training.estimate()
     # print("Model trained..........")
     predicted = training.predict(test=test_red)

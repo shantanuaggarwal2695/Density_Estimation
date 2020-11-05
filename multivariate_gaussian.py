@@ -47,8 +47,8 @@ class GaussNB:
         
         
     def fit(self, X, y):
-        print(pd.DataFrame(X))
-        print(y.shape)
+        # print(pd.DataFrame(X))
+        print(y)
         self.n_samples, self.n_feats = X.shape
         self.n_classes = np.unique(y).shape[0]
         self.classes_ = np.unique(y)
